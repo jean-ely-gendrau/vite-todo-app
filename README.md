@@ -1,16 +1,83 @@
-# React + Vite
+# TodoList React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application de gestion de taches construite avec React et Vite.
 
-Currently, two official plugins are available:
+## Fonctionnalites
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Ajouter des taches avec validation
+- Marquer les taches comme terminees
+- Modifier le texte des taches
+- Supprimer des taches individuellement
+- Filtrer par statut (Toutes / Actives / Terminees)
+- Statistiques en temps reel
+- Persistance des donnees (localStorage)
+- Bouton pour tout supprimer
 
-## React Compiler
+## Technologies
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19
+- Vite 7
+- Tailwind CSS 4
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```bash
+npm install
+```
+
+## Developpement
+
+```bash
+npm run dev
+```
+
+L'application sera disponible sur `http://localhost:5173`
+
+## Build
+
+```bash
+npm run build
+```
+
+## Structure du projet
+
+```
+src/
+├── components/
+│   ├── TodoForm.jsx      # Formulaire d'ajout
+│   ├── TodoItem.jsx      # Element de tache
+│   ├── TodoList.jsx      # Liste des taches
+│   ├── TodoFilter.jsx    # Boutons de filtre
+│   └── TodoStats.jsx     # Statistiques
+├── hooks/
+│   ├── useLocalStorage.js  # Hook de persistance
+│   └── useTodos.js         # Hook de gestion CRUD
+├── App.jsx
+├── App.css
+└── main.jsx
+```
+
+## Hooks personnalises
+
+### useLocalStorage
+
+Synchronise un state React avec le localStorage du navigateur.
+
+```jsx
+const [value, setValue] = useLocalStorage('key', initialValue);
+```
+
+### useTodos
+
+Gere les operations CRUD sur les taches.
+
+```jsx
+const { todos, ajouterTodo, toggleTodo, supprimerTodo, editerTodo, toutSupprimer } = useTodos();
+```
+
+## Evolutions prevues
+
+- Authentification utilisateur
+- Backend API avec MySQL
+- Categories de taches
+- Dates limites
