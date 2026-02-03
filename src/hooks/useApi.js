@@ -41,14 +41,25 @@ function useApi() {
     await fetchTodos();
   };
 
-  // TODO : Modifier un todo (PUT) et rafraîchir la liste
+  // Modifier un todo (PUT)
   const toggleTodo = async (id) => {
-
+    const todo = todos.find(t => t.id === id);
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ text: todo.texte, completed: todo.completed ? 0 : 1 })
+    });
+    if (!response.ok) throw new Error("Erreur lors de la modification");
+    await fetchTodos();
   };
 
-  // TODO : Supprimer un todo (DELETE) et rafraîchir la liste
+  // Supprimer un todo (DELETE)
   const supprimerTodo = async (id) => {
-
+    const response = await fetch(`${API_URL}/${id}`, {
+      method: 'DELETE'
+    });
+    if (!response.ok) throw new Error("Erreur lors de la suppression");
+    await fetchTodos();
   };
 
   // Modifier le texte d'un todo (PUT)
